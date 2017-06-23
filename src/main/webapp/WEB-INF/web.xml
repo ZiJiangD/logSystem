@@ -1,7 +1,36 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-<web-app>
   <display-name>logSystem</display-name>
+
+  <!--1、从类路径下加载spring配置文件，classpath关键字特只在类路径下加载-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+
+  <!--负责启动Spirng容器的监听器，它将应用 1 处的上下文参数获得Spring配置文件地址-->
+  <listener>
+    <listener-class>
+    org.springframework.web.context.ContextLoaderListener
+    </listener-class>
+  </listener>
+
+  <servlet>
+    <servlet-name>viewspace</servlet-name>
+    <servlet-class>
+    org.springframework.web.servlet.DispatcherServlet
+    </servlet-class>
+    <load-on-startup>3</load-on-startup>
+  </servlet>
+
+  <!--Spring MVC 处理的URL -->
+  <servlet-mapping>
+      <servlet-name>viewspace</servlet-name>
+      <url-pattern>*.html</url-pattern>
+  </servlet-mapping>
 </web-app>
